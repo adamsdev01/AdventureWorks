@@ -1,0 +1,55 @@
+﻿@page "/SalesGrid"
+@using AdventureWorksApp.Data.Models
+
+<h3>Sales Orders</h3>
+
+@if(GridData == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <TelerikGrid TItem="@SalesOrderHeader"
+        OnRead="@ReadItems"
+        Width="1240px"
+        FilterMode="GridFilterMode.FilterRow"
+        Sortable="true"
+        Pageable="true">
+
+        <GridToolBar>
+            <GridCommandButton Command="ExcelExport" Icon="file-excel">
+                Export to Excel
+            </GridCommandButton>
+        </GridToolBar>
+
+        <GridColumns>
+            <GridColumn Visible="false" Field=@nameof(SalesOrderHeader.SalesOrderId) Id="@SalesOrderId"></GridColumn>
+            <GridColumn Field=@nameof(SalesOrderHeader.OrderDate) DisplayFormat="{0:MM/dd/yyyy}" Title="Order Date" Width="250px"></GridColumn>
+            <GridColumn Field=@nameof(SalesOrderHeader.OnlineOrderFlag) Title="Online Order" Width="100px">
+                <Template>
+                    @{
+                        var salesOrderHeader = context as SalesOrderHeader;
+           
+
+                        if(salesOrderHeader.OnlineOrderFlag == zero)
+                        {
+                            <span class="badge badge-success" style="text-align:center">Sales Person</span>
+                        }
+                        else if(salesOrderHeader.OnlineOrderFlag == one)
+                        {
+                            <span class="badge badge-danger" style="text-align:center">Customer</span>
+                        }
+                    }
+                </Template>
+            </GridColumn>
+            <GridCommandColumn>
+                <GridCommandButton Id="@SalesOrderId" onclick="GridViewHandler" Icon="pencil" ThemeColor="@(ThemeConstants.Button.ThemeColor.Primary)"></GridCommandButton>
+            </GridCommandColumn>
+        </GridColumns>
+
+    </TelerikGrid>
+}
+
+@code {
+
+}
