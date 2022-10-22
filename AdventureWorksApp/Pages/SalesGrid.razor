@@ -11,7 +11,7 @@ else
 {
     <TelerikGrid TItem="@SalesOrderHeader"
         OnRead="@ReadItems"
-        Width="1240px"
+        Width="100%"
         FilterMode="GridFilterMode.FilterRow"
         Sortable="true"
         Pageable="true">
@@ -24,26 +24,60 @@ else
 
         <GridColumns>
             <GridColumn Visible="false" Field=@nameof(SalesOrderHeader.SalesOrderId) Id="@SalesOrderId"></GridColumn>
-            <GridColumn Field=@nameof(SalesOrderHeader.OrderDate) DisplayFormat="{0:MM/dd/yyyy}" Title="Order Date" Width="250px"></GridColumn>
-            <GridColumn Field=@nameof(SalesOrderHeader.OnlineOrderFlag) Title="Online Order" Width="100px">
+            <GridColumn Field=@nameof(SalesOrderHeader.OrderDate) DisplayFormat="{0:MM/dd/yyyy}" Title="Order Date" Width="200px"></GridColumn>
+            <GridColumn Field=@nameof(SalesOrderHeader.ShipDate) DisplayFormat="{0:MM/dd/yyyy}" Title="Ship Date" Width="200px"></GridColumn>
+            <GridColumn Field=@nameof(SalesOrderHeader.DueDate) DisplayFormat="{0:MM/dd/yyyy}" Title="Due Date" Width="200px"></GridColumn>
+            <GridColumn Field=@nameof(SalesOrderHeader.Status) Title="Order Status" Width="250px">
+                  <Template>
+                    @{
+                        var salesOrderHeader = context as SalesOrderHeader;
+           
+                        if(salesOrderHeader.Status == 1)
+                        {
+                            <span class="badge badge-warning" style="text-align:center">In Progress</span>
+                        }
+                        if(salesOrderHeader.Status == 2)
+                        {
+                            <span class="badge badge-primary" style="text-align:center">Approved</span>
+                        }
+                        if(salesOrderHeader.Status == 3)
+                        {
+                            <span class="badge badge-info" style="text-align:center">Backordered</span>
+                        }
+                        if(salesOrderHeader.Status == 4)
+                        {
+                            <span class="badge badge-danger" style="text-align:center">Rejected</span>
+                        }
+                        if(salesOrderHeader.Status == 5)
+                        {
+                            <span class="badge badge-success" style="text-align:center">Shipped</span>
+                        }
+                        if(salesOrderHeader.Status == 6)
+                        {
+                            <span class="badge badge-danger" style="text-align:center">Cancelled</span>
+                        }
+                        
+                    }
+                </Template>
+            </GridColumn>
+            <GridColumn Field=@nameof(SalesOrderHeader.OnlineOrderFlag) Title="Submitted Online Order" Width="250px">
                 <Template>
                     @{
                         var salesOrderHeader = context as SalesOrderHeader;
            
-
-                        if(salesOrderHeader.OnlineOrderFlag == zero)
+                        if(salesOrderHeader.OnlineOrderFlag == true)
                         {
                             <span class="badge badge-success" style="text-align:center">Sales Person</span>
                         }
-                        else if(salesOrderHeader.OnlineOrderFlag == one)
+                        else if(salesOrderHeader.OnlineOrderFlag == false)
                         {
                             <span class="badge badge-danger" style="text-align:center">Customer</span>
                         }
                     }
                 </Template>
             </GridColumn>
-            <GridCommandColumn>
-                <GridCommandButton Id="@SalesOrderId" onclick="GridViewHandler" Icon="pencil" ThemeColor="@(ThemeConstants.Button.ThemeColor.Primary)"></GridCommandButton>
+            <GridCommandColumn Title="Action" Width="100px">
+                <GridCommandButton Id="@SalesOrderId" OnClick="@GridViewHandler" Icon="file-txt" ThemeColor="@(ThemeConstants.Button.ThemeColor.Primary)"></GridCommandButton>
             </GridCommandColumn>
         </GridColumns>
 

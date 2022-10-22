@@ -12,10 +12,6 @@ namespace AdventureWorksApp.Pages
 {
     public partial class SalesGrid : ComponentBase
     {
-        public object context;
-        public bool? zero;
-        public bool? one;
-
         [Parameter]
         public string SalesOrderId { get; set; }
 

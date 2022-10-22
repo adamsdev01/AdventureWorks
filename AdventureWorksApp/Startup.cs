@@ -1,9 +1,11 @@
 ﻿using AdventureWorksApp.Data;
+using AdventureWorksApp.Data.Models;
 using AdventureWorksApp.Data.Services.AdventureWorksServices;
 using AdventureWorksApp.Data.Services.ToastNotificationService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -29,12 +31,24 @@ namespace AdventureWorksApp
             services.AddMemoryCache();
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
 
-            // Database Connection
-            AppConstants.DatabaseConnectionString = Configuration.GetConnectionString("DefaultConnection");
-
             // Application Services
             services.AddScoped<ToastService>();
             services.AddScoped<SalesService>();
+
+            #region Connection String
+            services.AddDbContext<AdventureWorksContext>(_ =>
+            {
+                _.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), options =>
+                {
+                    options.CommandTimeout(180); // 3 minutes
+                });
+            });
+
+
+            //(options => {
+            //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            #endregion
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
