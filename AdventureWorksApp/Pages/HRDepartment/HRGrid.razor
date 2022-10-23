@@ -1,0 +1,95 @@
+﻿@page "/HRDepartment/HRGrid"
+@using AdventureWorksApp.Data.Models
+
+
+<h3>Employees</h3>
+
+@if(GridData == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <TelerikGrid TItem="@Employee"
+        OnRead="@ReadItems"
+        Width="100%"
+        FilterMode="GridFilterMode.FilterRow"
+        Sortable="true"
+        Pageable="true">
+
+        <GridToolBar>
+            <GridCommandButton Command="ExcelExport" Icon="file-excel">
+                Export to Excel
+            </GridCommandButton>
+        </GridToolBar>
+
+        <GridColumns>
+            <GridColumn Visible="false" Field=@nameof(Employee.BusinessEntityId) Id="@BusinessEntityId"></GridColumn>
+            <GridColumn Field=@nameof(Employee.BusinessEntityId) Title="Name" Width="150px">
+                <Template>
+                    @{
+                        int businessEntityId = (context as Employee).BusinessEntityId;
+                        <text>@GetPersonFirstNameFromId(businessEntityId)</text>
+                    }
+                </Template>
+            </GridColumn>
+            <GridColumn Field=@nameof(Employee.JobTitle) Title="Job Title" Width="150px"></GridColumn>
+            <GridColumn Field=@nameof(Employee.OrganizationLevel) Title="Level" Width="150px">
+                <Template>
+                    @{
+                        var employee = context as Employee;
+
+                        if(employee.OrganizationLevel == null)
+                        {
+                            <span class="badge badge-dark" style="text-align:center">CEO</span>
+                        } 
+                        if(employee.OrganizationLevel == 1)
+                        {
+                            <span class="badge badge-success" style="text-align:center">Level @employee.OrganizationLevel</span>
+                        }
+                        if(employee.OrganizationLevel == 2)
+                        {
+                            <span class="badge badge-primary" style="text-align:center">Level @employee.OrganizationLevel</span>
+                        }
+                        if(employee.OrganizationLevel == 3)
+                        {
+                            <span class="badge badge-warning" style="text-align:center">Level @employee.OrganizationLevel</span>
+                        }
+                        if(employee.OrganizationLevel == 4)
+                        {
+                            <span class="badge badge-secondary" style="text-align:center">Level @employee.OrganizationLevel</span>
+                        }
+                        if(employee.OrganizationLevel == 5)
+                        {
+                            <span class="badge badge-info" style="text-align:center">Level @employee.OrganizationLevel</span>
+                        }
+                    }
+                </Template>
+            </GridColumn>
+            <GridColumn Field=@nameof(Employee.HireDate) DisplayFormat="{0:MM/dd/yyyy}" Title="Hire Date" Width="150px"></GridColumn>
+            <GridColumn Field=@nameof(Employee.Gender) Title="Gender" Width="100px">
+                <Template>
+                    @{
+                        var employee = context as Employee;
+           
+                        if(employee.Gender == "M")
+                        {
+                            <span class="badge badge-info" style="text-align:center">@employee.Gender</span>
+                        }
+                        else if(employee.Gender == "F")
+                        {
+                            <span class="badge badge-primary" style="text-align:center">@employee.Gender</span>
+                        }
+                    }
+                </Template>
+            </GridColumn>
+            <GridCommandColumn Title="Action" Width="100px">
+                <GridCommandButton Id="@BusinessEntityId" OnClick="@GridViewHandler" Icon="file-txt" ThemeColor="@(ThemeConstants.Button.ThemeColor.Primary)"></GridCommandButton>
+            </GridCommandColumn>
+        </GridColumns>
+
+    </TelerikGrid>
+}
+@code {
+
+}
