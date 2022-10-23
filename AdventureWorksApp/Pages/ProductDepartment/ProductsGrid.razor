@@ -1,0 +1,122 @@
+﻿@page "/ProductDepartment/ProductsGrid"
+@using AdventureWorksApp.Data.Models
+
+<h3>Products</h3>
+<p><b>Sold or used in the manufacturing of sold products</b></p>
+@if(GridData == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <TelerikGrid TItem="@Product"
+        OnRead="@ReadItems"
+        Width="100%"
+        FilterMode="GridFilterMode.FilterRow"
+        Sortable="true"
+        Pageable="true">
+
+        <GridToolBar>
+            <GridCommandButton Command="ExcelExport" Icon="file-excel">
+                Export to Excel
+            </GridCommandButton>
+        </GridToolBar>
+
+        <GridColumns>
+            <GridColumn Visible="false" Field=@nameof(Product.ProductId) Id="@ProductId"></GridColumn>
+            <GridColumn Field=@nameof(Product.Name)  Title="Product Name" Width="200px"></GridColumn>
+            <GridColumn Field=@nameof(Product.ProductNumber) Title="Product Number" Width="200px"></GridColumn>
+            <GridColumn Field=@nameof(Product.FinishedGoodsFlag) Title="Finished Good" Width="200px">
+                <Template>
+                    @{
+                        var product = context as Product;
+
+                        if(product.FinishedGoodsFlag == false)
+                        {
+                            <span class="badge badge-secondary" style="text-align:center">Not Salable</span>
+                        } 
+                        
+                        if(product.FinishedGoodsFlag == true)
+                        {
+                            <span class="badge badge-info" style="text-align:center">Salable</span>
+                        } 
+                    }
+                </Template>
+            </GridColumn>
+
+            <GridColumn Field=@nameof(Product.MakeFlag) Title="Made" Width="200px">
+                <Template>
+                    @{
+                        var product = context as Product;
+
+                        if(product.MakeFlag == true)
+                        {
+                            <span class="badge badge-success" style="text-align:center">Product is purchased</span>
+                        } 
+                        
+                        if(product.MakeFlag == false)
+                        {
+                            <span class="badge badge-warning" style="text-align:center">Product is manufactured in-house</span>
+                        } 
+                    }
+                </Template>
+            </GridColumn>
+             <GridColumn Field=@nameof(Product.Color) Title="Product Color" Width="200px">
+                <Template>
+                    @{
+                        var product = context as Product;
+
+                        if(product.Color == null)
+                        {
+                            <span class="badge badge-dark" style="text-align:center">N/A</span>
+                        }                  
+                        if(product.Color == "Black")
+                        {
+                            <span class="badge badge-dark" style="text-align:center">Black</span>
+                        } 
+                        if(product.Color == "Blue")
+                        {
+                            <span class="badge badge-dark" style="text-align:center">Blue</span>
+                        } 
+                        if(product.Color == "Grey")
+                        {
+                            <span class="badge badge-dark" style="text-align:center">Grey</span>
+                        } 
+                        if(product.Color == "Multi")
+                        {
+                            <span class="badge badge-dark" style="text-align:center">Multi</span>
+                        } 
+                        if(product.Color == "Red")
+                        {
+                            <span class="badge badge-dark" style="text-align:center">Red</span>
+                        } 
+                        if(product.Color == "Silver")
+                        {
+                            <span class="badge badge-dark" style="text-align:center">Silver</span>
+                        } 
+                        if(product.Color == "Silver/Black")
+                        {
+                            <span class="badge badge-dark" style="text-align:center">Silver/Black</span>
+                        } 
+                        if(product.Color == "White")
+                        {
+                            <span class="badge badge-dark" style="text-align:center">White</span>
+                        } 
+                        if(product.Color == "Yellow")
+                        {
+                            <span class="badge badge-dark" style="text-align:center">Yellow</span>
+                        } 
+                    }
+                </Template>
+            </GridColumn>
+            <GridCommandColumn Title="Action" Width="100px">
+                <GridCommandButton Id="@ProductId" OnClick="@GridViewHandler" Icon="file-txt" ThemeColor="@(ThemeConstants.Button.ThemeColor.Primary)"></GridCommandButton>
+            </GridCommandColumn>
+        </GridColumns>
+
+    </TelerikGrid>
+}
+
+@code {
+
+}

@@ -8,7 +8,7 @@ using Telerik.Blazor.Components;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AdventureWorksApp.Pages
+namespace AdventureWorksApp.Pages.SalesDepartment
 {
     public partial class SalesGrid : ComponentBase
     {

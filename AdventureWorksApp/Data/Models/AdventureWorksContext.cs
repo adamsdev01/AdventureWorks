@@ -1408,6 +1408,10 @@ namespace AdventureWorksApp.Data.Models
                     .HasColumnName("ProductID")
                     .HasComment("Primary key for Product records.");
 
+                entity.Property(e => e.ActiveFlag)
+                   .HasMaxLength(1)
+                   .IsUnicode(false);
+
                 entity.Property(e => e.Class)
                     .HasMaxLength(2)
                     .IsFixedLength()

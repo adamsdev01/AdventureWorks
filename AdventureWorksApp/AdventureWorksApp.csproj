@@ -16,7 +16,6 @@
   
   <ItemGroup>
     <Folder Include="Data\Models\" />
-    <Folder Include="Pages\PartialPages\" />
   </ItemGroup>
 
 </Project>

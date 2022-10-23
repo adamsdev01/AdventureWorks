@@ -47,6 +47,7 @@ namespace AdventureWorksApp.Data.Models
         public DateTime? DiscontinuedDate { get; set; }
         public Guid Rowguid { get; set; }
         public DateTime ModifiedDate { get; set; }
+        public string ActiveFlag { get; set; }
 
         public virtual ProductModel ProductModel { get; set; }
         public virtual ProductSubcategory ProductSubcategory { get; set; }
