@@ -1233,6 +1233,10 @@ namespace AdventureWorksApp.Data.Models
                     .HasComment("Primary key for Person records.")
                     .ValueGeneratedNever();
 
+                entity.Property(e => e.ActiveFlag)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.AdditionalContactInfo)
                     .HasColumnType("xml")
                     .HasComment("Additional contact information about the person stored in xml format. ");

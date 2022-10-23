@@ -27,6 +27,7 @@ namespace AdventureWorksApp.Data.Models
         public string Demographics { get; set; }
         public Guid Rowguid { get; set; }
         public DateTime ModifiedDate { get; set; }
+        public string ActiveFlag { get; set; }
 
         public virtual BusinessEntity BusinessEntity { get; set; }
         public virtual Employee Employee { get; set; }

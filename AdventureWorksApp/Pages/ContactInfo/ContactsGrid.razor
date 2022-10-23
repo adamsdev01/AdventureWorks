@@ -1,0 +1,84 @@
+﻿@page "/ContactInfo/ContactsGrid"
+@using AdventureWorksApp.Data.Models
+
+<h3>Company Contacts</h3>
+<p>Employee, Customer, Vendor Contact Info</p>
+
+@if(GridData == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <TelerikGrid TItem="@Person"
+        OnRead="@ReadItems"
+        Width="100%"
+        FilterMode="GridFilterMode.FilterRow"
+        Sortable="true"
+        Pageable="true">
+
+        <GridToolBar>
+            <GridCommandButton Command="ExcelExport" Icon="file-excel">
+                Export to Excel
+            </GridCommandButton>
+        </GridToolBar>
+
+        <GridColumns>
+            <GridColumn Visible="false" Field=@nameof(Person.BusinessEntityId) Id="@BusinessEntityId"></GridColumn>
+            <GridColumn Field=@nameof(Person.BusinessEntityId) Title="Name" Width="150px">
+                <Template>
+                    @{
+                        int businessEntityId = (context as Person).BusinessEntityId;
+                        <text>@GetPersonFullName(businessEntityId)</text>
+                    }
+                </Template>
+            </GridColumn>
+            <GridColumn Field=@nameof(Person.PersonType) Title="Contact Type" Width="75px">
+                <Template>
+                    @{
+                        var person = context as Person;
+
+                        if(person.PersonType == "SC")
+                        {
+                            <span class="badge badge-warning" style="text-align:center">Store Contact</span>
+                        } 
+                        
+                        if(person.PersonType == "IN")
+                        {
+                            <span class="badge badge-warning" style="text-align:center">Individual (retail) customer</span>
+                        } 
+                        
+                        if(person.PersonType == "SP")
+                        {
+                            <span class="badge badge-success" style="text-align:center">Sales Person</span>
+                        } 
+                        
+                        if(person.PersonType == "EM")
+                        {
+                            <span class="badge badge-success" style="text-align:center">Employee (non-sales)</span>
+                        } 
+                        
+                        if(person.PersonType == "VC")
+                        {
+                            <span class="badge badge-dark" style="text-align:center">Vendor</span>
+                        } 
+                        
+                        if(person.PersonType == "GC")
+                        {
+                            <span class="badge badge-dark" style="text-align:center">General</span>
+                        } 
+                       
+                    }
+                </Template>
+            </GridColumn>
+            <GridCommandColumn Title="Action" Width="100px">
+                <GridCommandButton Id="@BusinessEntityId" OnClick="@GridViewHandler" Icon="file-txt" ThemeColor="@(ThemeConstants.Button.ThemeColor.Primary)"></GridCommandButton>
+            </GridCommandColumn>
+        </GridColumns>
+
+    </TelerikGrid>
+}
+
+@code {
+
+}

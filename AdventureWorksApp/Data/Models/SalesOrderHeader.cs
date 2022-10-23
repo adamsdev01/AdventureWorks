@@ -38,7 +38,6 @@ namespace AdventureWorksApp.Data.Models
         public Guid Rowguid { get; set; }
         public DateTime ModifiedDate { get; set; }
         public string ActiveFlag { get; set; }
-
         public virtual Address BillToAddress { get; set; }
         public virtual CreditCard CreditCard { get; set; }
         public virtual CurrencyRate CurrencyRate { get; set; }
