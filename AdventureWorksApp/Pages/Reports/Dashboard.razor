@@ -1,0 +1,46 @@
+﻿@page "/Reports/Dashboard"
+@using AdventureWorksApp.Pages.ReportCharts
+
+<div class="row">
+    <div class="col-md-12">
+        <h5>REPORTS DASHBOARD & DATA</h5>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <h3 class="card-header">Data Dashboard</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="container">
+                        <h4><b>@Products</b></h4>
+                        <p>Products In Stock</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <h4 class="card-header">Product Types</h4>
+            <div class="card-body">
+                <ProductsByTypeChart ProductsCount="@Products"></ProductsByTypeChart>
+                <div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+
+@code {
+
+}

@@ -1,0 +1,34 @@
+﻿@using AdventureWorksApp.Data.ViewModels
+
+<TelerikChart>
+    <ChartSeriesItems>
+        <ChartSeries Type="ChartSeriesType.Donut" 
+                    Data="@ChartData"
+                    HoleSize="60"
+                    Field="@nameof(ItemByTypeChartModel.IssueCount)"
+                    CategoryField="@nameof(ItemByTypeChartModel.CategoryName)">
+
+                    <ChartSeriesLabels Visible="true"
+                        Position="ChartSeriesLabelsPosition.Center" 
+                        Template="#=Math.round(percentage * 100)#%"
+                        Background="Transparent">
+                    </ChartSeriesLabels>
+
+                    <ChartSeriesTooltip Visible="true">
+                        <Template>
+                            @{
+                                ItemByTypeChartModel currItem = context.DataItem as ItemByTypeChartModel;
+                                <strong>@currItem.CategoryName - @context.Percentage.ToString("P")</strong>
+                            }
+                        </Template>
+                    </ChartSeriesTooltip>
+        </ChartSeries>
+    </ChartSeriesItems>
+    <ChartLegend Position="ChartLegendPosition.Bottom"></ChartLegend>
+</TelerikChart>
+
+<h3>ProductsByTypeChart</h3>
+
+@code {
+
+}

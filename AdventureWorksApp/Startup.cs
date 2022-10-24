@@ -1,6 +1,7 @@
 ﻿using AdventureWorksApp.Data;
 using AdventureWorksApp.Data.Models;
 using AdventureWorksApp.Data.Services.AdventureWorksServices;
+using AdventureWorksApp.Data.Services.ReportsService;
 using AdventureWorksApp.Data.Services.ToastNotificationService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,7 +38,8 @@ namespace AdventureWorksApp
             services.AddScoped<HRService>();
             services.AddScoped<PersonsService>();
             services.AddScoped<ProductService>();
-            services.AddScoped<PurchaseService>(); 
+            services.AddScoped<PurchaseService>();
+            services.AddScoped<ReportsDashboardService>();
 
             #region Connection String
             services.AddDbContext<AdventureWorksContext>(_ =>
@@ -47,10 +49,6 @@ namespace AdventureWorksApp
                     options.CommandTimeout(180); // 3 minutes
                 });
             });
-
-
-            //(options => {
-            //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             #endregion
 
         }
