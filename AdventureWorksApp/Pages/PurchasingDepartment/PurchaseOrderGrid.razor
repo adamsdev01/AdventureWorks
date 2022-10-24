@@ -1,8 +1,95 @@
 ﻿@page "/PurchasingDepartment/PurchaseOrderGrid"
+@using AdventureWorksApp.Data.Models
 
 
-<h3>Purchase Orders</h3>
+<h3>Purchase Order Information</h3>
 
+
+@if(GridData == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <TelerikGrid TItem="@PurchaseOrderHeader"
+        OnRead="@ReadItems"
+        Width="100%"
+        FilterMode="GridFilterMode.FilterRow"
+        Sortable="true"
+        Pageable="true">
+
+        <GridToolBar>
+            <GridCommandButton Command="ExcelExport" Icon="file-excel">
+                Export to Excel
+            </GridCommandButton>
+        </GridToolBar>
+
+        <GridColumns>
+            <GridColumn Visible="false" Field=@nameof(PurchaseOrderHeader.PurchaseOrderId) Id="@PurchaseOrderId"></GridColumn>
+            <GridColumn Field=@nameof(PurchaseOrderHeader.PurchaseOrderId) Title="Purchase Order Id" Width="200px"></GridColumn>
+            <GridColumn Field=@nameof(PurchaseOrderHeader.OrderDate) DisplayFormat="{0:MM/dd/yyyy}" Title="Order Date" Width="200px"></GridColumn>
+            <GridColumn Field=@nameof(PurchaseOrderHeader.ShipDate) DisplayFormat="{0:MM/dd/yyyy}" Title="Ship Date" Width="200px"></GridColumn>
+            <GridColumn Field=@nameof(PurchaseOrderHeader.Status) Title="Order Status" Width="200px">
+                <Template>
+                    @{
+                        var purchaseOrderHeader = context as PurchaseOrderHeader;
+           
+                        if(purchaseOrderHeader.Status == 1)
+                        {
+                            <span class="badge badge-warning" style="text-align:center">Pending</span>
+                        }
+                        if(purchaseOrderHeader.Status == 2)
+                        {
+                            <span class="badge badge-success" style="text-align:center">Approved</span>
+                        }
+                        if(purchaseOrderHeader.Status == 3)
+                        {
+                            <span class="badge badge-danger" style="text-align:center">Rejected</span>
+                        }
+                        if(purchaseOrderHeader.Status == 4)
+                        {
+                            <span class="badge badge-success" style="text-align:center">Complete</span>
+                        }
+                         
+                    }
+                </Template>
+            </GridColumn>
+            <GridColumn Field=@nameof(PurchaseOrderHeader.ShipMethodId) Title="Shipping Method" Width="200px">
+                <Template>
+                    @{
+                        var purchaseOrderHeader = context as PurchaseOrderHeader;
+           
+                        if(purchaseOrderHeader.ShipMethodId == 1)
+                        {
+                            <span class="badge badge-dark" style="text-align:center">TEst</span>
+                        }
+                        if(purchaseOrderHeader.ShipMethodId == 2)
+                        {
+                            <span class="badge badge-dark" style="text-align:center">ZY - EXPRESS</span>
+                        }
+                        if(purchaseOrderHeader.ShipMethodId == 3)
+                        {
+                            <span class="badge badge-dark" style="text-align:center">OVERSEAS - DELUXE</span>
+                        }
+                        if(purchaseOrderHeader.ShipMethodId == 4)
+                        {
+                            <span class="badge badge-dark" style="text-align:center">OVERNIGHT J-FAST</span>
+                        }
+                        if(purchaseOrderHeader.ShipMethodId == 5)
+                        {
+                            <span class="badge badge-dark" style="text-align:center">CARGO TRANSPORT 5</span>
+                        }
+                           
+                    }
+                </Template>
+            </GridColumn>
+            <GridCommandColumn Title="Action" Width="100px">
+                <GridCommandButton Id="@PurchaseOrderId" OnClick="@GridViewHandler" Icon="file-txt" ThemeColor="@(ThemeConstants.Button.ThemeColor.Primary)"></GridCommandButton>
+            </GridCommandColumn>
+        </GridColumns>
+
+    </TelerikGrid>
+}
 @code {
 
 }

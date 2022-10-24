@@ -37,6 +37,7 @@ namespace AdventureWorksApp
             services.AddScoped<HRService>();
             services.AddScoped<PersonsService>();
             services.AddScoped<ProductService>();
+            services.AddScoped<PurchaseService>(); 
 
             #region Connection String
             services.AddDbContext<AdventureWorksContext>(_ =>

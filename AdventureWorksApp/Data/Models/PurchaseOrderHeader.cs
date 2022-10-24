@@ -23,6 +23,7 @@ namespace AdventureWorksApp.Data.Models
         public decimal Freight { get; set; }
         public decimal TotalDue { get; set; }
         public DateTime ModifiedDate { get; set; }
+        public string ActiveFlag { get; set; }
 
         public virtual Employee Employee { get; set; }
         public virtual ShipMethod ShipMethod { get; set; }

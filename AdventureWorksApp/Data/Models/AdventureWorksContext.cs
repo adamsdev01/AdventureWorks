@@ -2143,6 +2143,10 @@ namespace AdventureWorksApp.Data.Models
 
                 entity.HasIndex(e => e.VendorId);
 
+                entity.Property(e => e.ActiveFlag)
+                 .HasMaxLength(1)
+                 .IsUnicode(false);
+
                 entity.Property(e => e.PurchaseOrderId)
                     .HasColumnName("PurchaseOrderID")
                     .HasComment("Primary key.");
