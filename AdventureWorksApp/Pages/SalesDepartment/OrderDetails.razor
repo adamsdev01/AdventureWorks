@@ -1,0 +1,79 @@
+﻿@page "/SalesDepartment/OrderDetails/{id}"
+
+
+<h3>Sales Order Details</h3>
+<br />
+@*<TelerikForm Model="@selectedSalesOrderHeader">   
+    <FormItems>
+        
+    </FormItems>
+</TelerikForm>*@
+<div class="alert alert-success" role="alert">
+    <div class="row">
+        <div class="col-lg-9">
+            <h4>Sales Order Number - #@selectedSalesOrderHeader.SalesOrderNumber</h4>
+        </div>
+        <div class="col-lg-3 text-right">
+            <NavLink role="button" class="btn btn-light btn-sm">
+                <TelerikIcon Icon="arrow-left"></TelerikIcon><a href="/SalesDepartment/SalesGrid">Back To List</a>
+            </NavLink>
+        </div>
+    </div>
+</div>
+<br />
+<div class="row">
+    @if(SalesOrderHeader == null && SalesOrderHeader.SalesOrderDetail == null)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        <div class="row">
+            <h3><b>Customer Information</b></h3>
+            <div class="form">
+                <div class="col-md-4">
+                     <label>Name</label>
+                     <TelerikTextBox>@SalesOrderHeader.Customer.Person.FirstName + " " + @SalesOrderHeader.Customer.Person.LastName</TelerikTextBox>
+                </div>  
+                <div class="col-md-4">
+                     <label>Customer Id</label>
+                    <TelerikTextBox>@SalesOrderHeader.Customer.CustomerId</TelerikTextBox>
+                </div>
+                <div class="col-md-4">
+                     <label>Account #</label>
+                     <TelerikTextBox>@SalesOrderHeader.Customer.AccountNumber</TelerikTextBox>
+                </div>  
+            </div>
+        </div>
+        <div class="row">
+            <h3><b>Address Information</b></h3>
+            <div class="col-md-4">
+                    <label>Customer Id</label>
+                <TelerikTextBox>@SalesOrderHeader.Customer.CustomerId</TelerikTextBox>
+            </div>
+            <div class="col-md-4">
+                <label>Account #</label>
+                <TelerikTextBox>@SalesOrderHeader.Customer.AccountNumber</TelerikTextBox>
+            </div>           
+        </div>
+        <div class="row">
+            <h3><b>Credit Card Information</b></h3>
+        </div>
+        @foreach(var detail in SalesOrderHeader.SalesOrderDetail)
+        {
+            <div class="box-content" style="margin: auto;">
+                <label>Order Quantity</label>
+                <p>@detail.OrderQty</p>
+            </div>
+        }   
+    }
+   
+</div>
+<br />
+@*<hr style="height:10px; border:none; color:#333; background-color: #333;" />
+<h6><b>Information</b></h6>*@
+
+
+@code {
+
+}

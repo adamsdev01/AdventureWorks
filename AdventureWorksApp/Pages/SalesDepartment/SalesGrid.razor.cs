@@ -47,10 +47,7 @@ namespace AdventureWorksApp.Pages.SalesDepartment
 
             selectedSalesOrderHeader = _salesService.GetSalesOrderHeaderById(id);
 
-            if (selectedSalesOrderHeader.SalesOrderId > id)
-            {
-                _navigationManager.NavigateTo("/ViewSalesOrderDetails/" + id);
-            }
+            _navigationManager.NavigateTo("/SalesDepartment/OrderDetails/" + id);
         }
 
         private async Task GridDeleteHandler(GridCommandEventArgs args)

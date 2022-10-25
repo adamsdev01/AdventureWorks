@@ -23,7 +23,7 @@ else
         </GridToolBar>
 
         <GridColumns>
-            <GridColumn Visible="false" Field=@nameof(SalesOrderHeader.SalesOrderId) Id="@SalesOrderId"></GridColumn>
+            <GridColumn Field=@nameof(SalesOrderHeader.SalesOrderId) Id="@SalesOrderId" Title="Sales Order Id" Width="200px"></GridColumn>
             <GridColumn Field=@nameof(SalesOrderHeader.OrderDate) DisplayFormat="{0:MM/dd/yyyy}" Title="Order Date" Width="200px"></GridColumn>
             <GridColumn Field=@nameof(SalesOrderHeader.ShipDate) DisplayFormat="{0:MM/dd/yyyy}" Title="Ship Date" Width="200px"></GridColumn>
             <GridColumn Field=@nameof(SalesOrderHeader.DueDate) DisplayFormat="{0:MM/dd/yyyy}" Title="Due Date" Width="200px"></GridColumn>
